@@ -22,14 +22,30 @@ class AppleSignInButton extends StatefulWidget {
   /// A custom corner radius to be used by this button.
   final double cornerRadius;
 
+  final double appleLogoHeight;
+
+  final double applePaddingRight;
+
+  final double appleButtonHeight;
+
+  final double appleTitleFontSize;
+
   const AppleSignInButton({
     this.onPressed,
     this.type = ButtonType.defaultButton,
     this.style = ButtonStyle.white,
     this.cornerRadius = 6,
+    this.appleLogoHeight = 14,
+    this.applePaddingRight = 6,
+    this.appleButtonHeight = 50,
+    this.appleTitleFontSize = 20
   })  : assert(type != null),
         assert(style != null),
-        assert(cornerRadius != null);
+        assert(cornerRadius != null),
+        assert(appleLogoHeight != null),
+        assert(applePaddingRight != null),
+        assert(appleButtonHeight != null),
+        assert(appleTitleFontSize != null);
 
   @override
   State<StatefulWidget> createState() => _AppleSignInButtonState();
@@ -61,7 +77,7 @@ class _AppleSignInButtonState extends State<AppleSignInButton> {
           maxHeight: 64,
           minWidth: 200,
         ),
-        height: 50,
+        height: widget.appleButtonHeight,
         decoration: BoxDecoration(
           color: _isTapDown ? Colors.grey : bgColor,
           borderRadius: BorderRadius.all(
@@ -74,11 +90,11 @@ class _AppleSignInButtonState extends State<AppleSignInButton> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(bottom: 1, left: 2, right: 6),
+              padding: EdgeInsets.only(bottom: 1, left: 2, right: widget.applePaddingRight),
               child: SizedBox(
-                height: 14,
+                height: widget.appleLogoHeight,
                 child: AspectRatio(
-                  aspectRatio: 25 / 31,
+                  aspectRatio: 20 / 26,
                   child: CustomPaint(
                     painter: _AppleLogoPainter(color: textColor),
                   ),
@@ -90,11 +106,12 @@ class _AppleSignInButtonState extends State<AppleSignInButton> {
                   ? 'Continue with Apple'
                   : 'Sign in with Apple',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: widget.appleTitleFontSize,
                 fontWeight: FontWeight.w500,
                 letterSpacing: .3,
                 wordSpacing: -.5,
                 color: textColor,
+                
               ),
             ),
           ],
